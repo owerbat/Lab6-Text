@@ -9,15 +9,7 @@ public:
 	char str[80];
 	TLink *pNext, *pDown;
 
-	TLink(char *_str = NULL, TLink *pN = NULL, TLink *pD = NULL) {
-		pNext = pN;
-		pDown = pD;
-		if (_str == NULL)
-			str[0] = '\0';
-		else
-			strncpy_s(str, _str, 80);
-	}
-
+	TLink(char *_str = NULL, TLink *pN = NULL, TLink *pD = NULL);
 	~TLink() {}
 };
 
@@ -30,4 +22,18 @@ class TText {
 public:
 	TText() {}
 
+	void GoNextLink();
+	void GoDownLink();
+	void GoPrevLink();
+
+	void InsNextLine(char *s);
+	void InsNextSection(char *s);
+	void InsDownLine(char *s);
+	void InsDownSection(char *s);
+
+	void DelNext();
+	void DelDown();
+
+	char *GetLine();
+	void SetLine(char *s);
 };
