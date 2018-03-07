@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <stack>
+#include <fstream>
 
 using namespace std;
 
@@ -36,4 +37,20 @@ public:
 
 	char *GetLine();
 	void SetLine(char *s);
+
+	TLink *ReadRec(ifstream& file);
+	void Read(char *fn);
+
+	void PrintText(TLink *tmp);
+	void Print();
+
+	void SaveText(TLink *tmp, ofstream& f);
+	void Save(char *name);
+
+	TLink *CopyRec(TLink *first);
+	TLink *Copy();
+
+	void Reset();
+	bool IsEnd();
+	void GoNext();
 };

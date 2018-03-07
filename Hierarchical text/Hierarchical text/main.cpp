@@ -1,17 +1,13 @@
 #include "TText.h"
 
 int main() {
-	TText t;
+	char fileName[] = "C:\\Users\\User\Documents\GitHub projects\Lab6-Text\Test.txt";
 
-	/*stack<int> c;
-	for (int i = 0; i < 5; i++) {
-		c.push(i);
-	}
+	TText text;
 
-	for (int i = 0; i < 3; i++) {
-		cout << c.top() << endl;
-		c.pop();
-	}*/
+	text.Read(fileName);
+
+	cout << "\nOK\n";
 
 	return 0;
 }

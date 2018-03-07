@@ -87,3 +87,115 @@ char *TText::GetLine() {
 void TText::SetLine(char *s) {
 	strncpy_s(pCurr->str, s, 80);
 }
+
+TLink *TText::ReadRec(ifstream& file) {
+	char buf[80];
+	TLink *tmp, *first = NULL;
+
+	while (!file.eof()) {
+		file.getline(buf, 80, '\n');
+
+		if (buf[0] == '}')
+			break;
+		else if (buf[0] == '{')
+			tmp->pDown = ReadRec(file);
+		else if (first == NULL) {
+			first = new TLink(buf);
+			tmp = first;
+		}
+		else {
+			tmp->pNext = new TLink(buf);
+			tmp = tmp->pNext;
+		}
+	}
+
+	return first;
+}
+
+void TText::Read(char *fn) {
+	ifstream ifs(fn);
+	if(fn)
+		pFirst = ReadRec(ifs);
+}
+
+void TText::PrintText(TLink *tmp) {
+	if (tmp != NULL) {
+		for (int i = 0; i < level; i++)
+			cout << " ";
+		cout << tmp->str << endl;
+		level++;
+		PrintText(tmp->pDown);
+		level--;
+		PrintText(tmp->pNext);
+	}
+}
+
+void TText::Print() {
+	level = 0;
+	PrintText(pFirst);
+}
+
+void TText::SaveText(TLink *tmp, ofstream& f) {
+	f << tmp->str << endl;
+
+	if (tmp->pDown != NULL) {
+		f << "{\n";
+		SaveText(tmp->pDown, f);
+		f << "}\n";
+	}
+
+	if (tmp->pNext != NULL)
+		SaveText(tmp->pNext, f);
+}
+
+void TText::Save(char *name) {
+	ofstream ofs(name);
+	SaveText(pFirst, ofs);
+}
+
+TLink *TText::CopyRec(TLink *first) {
+	TLink *pN = NULL, *pD = NULL;
+
+	if (first->pDown != NULL)
+		pD = CopyRec(first->pDown);
+	if (first->pNext != NULL)
+		pN = CopyRec(first->pNext);
+
+	TLink *res = new TLink(first->str, pN, pD);
+
+	return res;
+}
+
+TLink *TText::Copy() {
+	return CopyRec(pFirst);
+}
+
+void TText::Reset() {
+	pCurr = pFirst;
+
+	while (!st.empty())
+		st.pop();
+	
+	st.push(pCurr);
+
+	if (pCurr->pNext != NULL)
+		st.push(pCurr->pNext);
+	if (pCurr->pDown != NULL)
+		st.push(pCurr->pDown);
+}
+
+bool TText::IsEnd() {
+	return st.empty();
+}
+
+void TText::GoNext() {
+	pCurr = st.top();
+	st.pop();
+
+	if (pCurr != pFirst) {
+		if (pCurr->pNext != NULL)
+			st.push(pCurr->pNext);
+		if (pCurr->pDown != NULL)
+			st.push(pCurr->pDown);
+	}
+}
