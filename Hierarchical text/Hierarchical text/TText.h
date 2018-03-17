@@ -9,11 +9,24 @@ class TLink {
 public:
 	char str[80];
 	TLink *pNext, *pDown;
+	//static TMem mem;
 
 	TLink(char *_str = NULL, TLink *pN = NULL, TLink *pD = NULL);
 	~TLink() {}
+
+	/*void *operator new(size_t s);
+	void operator delete(void *p);
+
+	static void InitMem(size_t s);
+	static void MemClear(TText &txt);*/
 };
 
+
+struct TMem {
+	TLink *pFirst;
+	TLink *pFree;
+	TLink *pLast;
+};
 
 
 class TText {
@@ -22,6 +35,11 @@ class TText {
 	int level;
 public:
 	TText() {}
+	TText(TLink *first);
+
+	TText operator=(TText &t);
+
+	TLink GetCurr();
 
 	void GoNextLink();
 	void GoDownLink();

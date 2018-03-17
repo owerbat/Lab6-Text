@@ -15,11 +15,30 @@ TLink::TLink(char *_str, TLink *pN, TLink *pD) {
 
 
 
+TText::TText(TLink *first) {
+	pCurr = pFirst = first;
+}
+
+TText TText::operator=(TText &t) {
+	TText res;
+
+	res.pFirst = t.pFirst;
+	res.pCurr = t.pCurr;
+	res.st = t.st;
+
+	return res;
+}
+
+
 void TText::GoNextLink() {
 	if (pCurr->pNext != NULL) {
 		st.push(pCurr);
 		pCurr = pCurr->pNext;
 	}
+}
+
+TLink TText::GetCurr() {
+	return *pCurr;
 }
 
 void TText::GoDownLink() {
@@ -76,8 +95,6 @@ void TText::DelDown() {
 	}
 }
 
-
-
 char *TText::GetLine() {
 	TLink *tmp = pCurr;
 	char *res = tmp->str;
@@ -115,7 +132,7 @@ TLink *TText::ReadRec(ifstream& file) {
 void TText::Read(char *fn) {
 	ifstream ifs(fn);
 	if(fn)
-		pFirst = ReadRec(ifs);
+		pCurr = pFirst = ReadRec(ifs);
 }
 
 void TText::PrintText(TLink *tmp) {
