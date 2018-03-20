@@ -137,8 +137,16 @@ void TText::Read(char *fn) {
 
 void TText::PrintText(TLink *tmp) {
 	if (tmp != NULL) {
+		if (tmp == pCurr) {
+			cout << "->";
+		}
+		else {
+			cout << "  ";
+		}
+
 		for (int i = 0; i < level; i++)
-			cout << " ";
+			cout << "   ";
+
 		cout << tmp->str << endl;
 		level++;
 		PrintText(tmp->pDown);

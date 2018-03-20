@@ -1,5 +1,6 @@
 #include "TText.h"
 #include <Windows.h>
+#include <conio.h>
 
 void clrscr(void);
 void clreol(void);
@@ -7,26 +8,37 @@ void gotoxy(int x, int y);
 
 int main() {
 	char fileName[] = "C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text\\Source.txt";
-
 	TText text, copytext;
 	char s;
+	char buf[80];
 
 	cout << "i - info\n";
 
 	while(true){
-		cout << "->";
-		cin >> s;
+		cout << "user: ";
+		s = _getch();
+		cout << s << endl;
 		
 		switch (s) {
-		case 'i': cout << "r - read\np - print\ns - save\nc - copy\nq - quit\n"; break;
+		case 'i': cout << "r - read\np - print\ns - save\nc - copy\nq - quit\ne - clear\na - go to previous link\nz - go to next link\nx - " << 
+						  "go to down link\n1 - insert next line\n2 - insert next section\n3 - insert down line\n4 - insert down section\n" << 
+						  "5 - delete next link\n6 - delete down link\n"; break;
 		case 'r': text.Read(fileName); break;
 		case 'p': text.Print(); break;
 		case 's': text.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text\\SavedText.txt"); break;
 		//case 'c': TText tmp(text.Copy()); tmp.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text\\Copy.txt"); break;
-		case 'z': clrscr(); break;
-		case 'x': gotoxy(5, 5); break;
+		case 'e': clrscr(); cout << "i - info\n"; break;
 		case 'q': exit(0);
-		default: cout << "Inpput error\n";
+		case 'a': text.GoPrevLink(); text.Print(); break;
+		case 'z': text.GoNextLink(); text.Print(); break;
+		case 'x': text.GoDownLink(); text.Print(); break;
+		case '1': cout << "Enter your line: "; cin >> buf; text.InsNextLine(buf); text.Print(); break;
+		case '2': cout << "Enter your line: "; cin >> buf; text.InsNextSection(buf); text.Print(); break;
+		case '3': cout << "Enter your line: "; cin >> buf; text.InsDownLine(buf); text.Print(); break;
+		case '4': cout << "Enter your line: "; cin >> buf; text.InsDownSection(buf); text.Print(); break;
+		case '5': text.DelNext(); text.Print(); break;
+		case '6': text.DelDown(); text.Print(); break;
+		default: cout << "Input error\n";
 		}
 	}
 
