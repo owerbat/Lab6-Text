@@ -15,7 +15,9 @@ int main() {
 	cout << "i - info\n";
 
 	while(true){
+		SetColor(ConsoleColor::LightGreen, ConsoleColor::Black);
 		cout << "user: ";
+		SetColor(ConsoleColor::LightGray, ConsoleColor::Black);
 		s = _getch();
 		cout << s << endl;
 		

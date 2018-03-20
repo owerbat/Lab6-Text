@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stack>
 #include <fstream>
+#include "FontColor.h"
 
 using namespace std;
 
@@ -37,7 +38,7 @@ public:
 	TText() {}
 	TText(TLink *first);
 
-	TText operator=(TText &t);
+	//TText operator=(TText &t);   // не закончено
 
 	TLink GetCurr();
 

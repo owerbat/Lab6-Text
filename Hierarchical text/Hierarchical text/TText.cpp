@@ -19,7 +19,8 @@ TText::TText(TLink *first) {
 	pCurr = pFirst = first;
 }
 
-TText TText::operator=(TText &t) {
+// необходимо присвоить каждое звено в результат
+/*TText TText::operator=(TText &t) {
 	TText res;
 
 	res.pFirst = t.pFirst;
@@ -27,7 +28,7 @@ TText TText::operator=(TText &t) {
 	res.st = t.st;
 
 	return res;
-}
+}*/
 
 
 void TText::GoNextLink() {
@@ -138,7 +139,9 @@ void TText::Read(char *fn) {
 void TText::PrintText(TLink *tmp) {
 	if (tmp != NULL) {
 		if (tmp == pCurr) {
+			SetColor(ConsoleColor::LightCyan, ConsoleColor::Black);
 			cout << "->";
+			SetColor(ConsoleColor::LightGray, ConsoleColor::Black);
 		}
 		else {
 			cout << "  ";

@@ -146,10 +146,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FontColor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TText.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FontColor.h" />
     <ClInclude Include="TText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

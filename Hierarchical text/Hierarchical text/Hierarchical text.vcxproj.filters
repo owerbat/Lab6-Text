@@ -21,9 +21,15 @@
     <ClCompile Include="TText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FontColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FontColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
